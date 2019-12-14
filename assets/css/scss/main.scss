@@ -1,0 +1,47 @@
+@use 'resets';
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: start;
+  background: yellowgreen;
+  width: 100%;
+  height: 100vh;
+  position: relative;
+}
+
+.board {
+  display: flex;
+  width: 50%;
+  flex-wrap: wrap;
+  min-width: 450px;
+  max-width: 500px;
+  
+  .board-grid {
+    width: percentage(1 / 3);
+    border: 1px red solid;
+    box-sizing: border-box;
+
+    .grid-content {
+      width: 100%;
+      padding-top: 100%;
+      position: relative;
+      background: springgreen;
+
+      .marker {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 120px;
+        position: absolute;
+        z-index: 1;
+        left: 0;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        background: aqua;
+      }
+    }
+  }
+}

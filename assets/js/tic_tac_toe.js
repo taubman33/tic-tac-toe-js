@@ -2,7 +2,7 @@
 const gameBoard = (function() {
   const board = [];
   for (let i = 0; i < 9; i++) {
-    board[i] = " ";
+    board[i] = "X";
   }
 
   const getBoard = () => board;
@@ -21,7 +21,7 @@ const Player = function(name, marker) {
 const displayController = (function() {
   
   // Count Rounds
-  const RoundCounter = function() {
+  const roundCounter = function() {
     let round = 1;
     return () => {
       console.log(round);
@@ -29,5 +29,34 @@ const displayController = (function() {
     }
   };
 
-  return { RoundCounter };
+  // Display Board
+  const displayBoard = function() {
+    if (document.querySelector(".board") != null) {
+      return;
+    } else {
+      let container = document.querySelector(".container");
+      let board = document.createElement("div");
+      board.classList.add("board");
+  
+      let tBoard = gameBoard.getBoard();
+      tBoard.forEach(boardSquare => {
+        let boardGrid = document.createElement("div");
+        boardGrid.classList.add("board-grid");
+    
+        let gridContent = document.createElement("div");
+        gridContent.classList.add("grid-content");
+    
+        let marker = document.createElement("div");
+        marker.classList.add("marker");
+        marker.textContent = boardSquare;
+    
+        gridContent.appendChild(marker);
+        boardGrid.appendChild(gridContent);
+        board.appendChild(boardGrid);
+        container.appendChild(board);
+      });
+    }
+  }
+
+  return { roundCounter, displayBoard };
 })();
