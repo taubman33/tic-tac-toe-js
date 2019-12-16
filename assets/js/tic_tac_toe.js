@@ -55,8 +55,11 @@ const Player = function(name, marker) {
 const displayController = (function() {
   let player1 = Player("Kevin", "O");
   let player2 = Player("Tim", "X");
+  let countRound = roundCounter();
+  let round = countRound();
+
   // Count Rounds
-  const roundCounter = function() {
+  function roundCounter() {
     let round = 0;
     return () => {
       
@@ -68,10 +71,8 @@ const displayController = (function() {
 
   // Event listener for clicking on board
   const controlGame = () => {
-    let countRound = roundCounter();
-    let round = countRound();
 
-    
+    // All grid squares
     let gridBoxes = document.querySelectorAll('.marker');
 
     // Add Event listener for each individual board square
@@ -80,10 +81,73 @@ const displayController = (function() {
         if (gameBoard.getBoard()[i] == " ") {
           (round % 2 == 0) ? player1.addMarker(i) : player2.addMarker(i);
           round = countRound();
+          let checkGameOverResult = checkGameOver();
+          if (checkGameOverResult.hasOwnProperty('victoryCondition')) {
+            console.log(checkGameOverResult);
+          } else if (checkGameOverResult.hasOwnProperty('draw')) {
+            console.log(checkGameOverResult);
+          }
         }   
       });
     }
   }
+
+  // Logic to check if game is over
+  const checkGameOver = () => {
+    let board = gameBoard.getBoard();
+    // check horizontal victory conditions
+    let checkVictory = horizontalVictory() || verticalVictory() || diagonalVictory();
+
+    if (checkVictory) {
+      return checkVictory;
+    } else if (draw()) {
+      return draw();
+    } else {
+      return {};
+    }
+
+    // function checkVictory() {
+// 
+    // }
+
+    function horizontalVictory() {
+      if (board[0] != " " && board[0] == board[1] && board[0] == board[2]) {
+        return { marker: board[0], victoryCondition: "horizontal", start: 0 };
+      } else if (board[3] != " " && board[3] == board[4] && board[3] == board[5]) {
+        return { marker: board[3], victoryCondition: "horizontal", start: 3 };
+      } else if (board[6] != " " && board[6] == board[7] && board[6] == board[8]) {
+        return { marker: board[6], victoryCondition: "horizontal", start: 6 };
+      }
+      return false;
+    }
+
+    function verticalVictory() {
+      if (board[0] != " " && board[0] == board[3] && board[0] == board[6]) {
+        return { marker: board[0], victoryCondition: "vertical", start: 0 };
+      } else if (board[1] != " " && board[1] == board[4] && board[1] == board[7]) {
+        return { marker: board[1], victoryCondition: "vertical", start: 1 };
+      } else if (board[2] != " " && board[2] == board[5] && board[2] == board[8]) {
+        return { marker: board[2], victoryCondition: "vertical", start: 2 };
+      }
+      return false;
+    }
+
+    function diagonalVictory() {
+      if (board[0] != " " && board[0] == board[4] && board[0] == board[8]) {
+        return { marker: board[0], victoryCondition: "diagonal", start: 0 };
+      } else if (board[2] != " " && board[2] == board[4] && board[2] == board[6]) {
+        return { marker: board[2], victoryCondition: "diagonal", start: 2 };
+      }
+      return false;
+    }
+
+    function draw() {
+      if (round == 10) {
+        return { draw: "draw" };
+      }
+    }
+  }
+
   return { roundCounter, controlGame };
 })();
 
