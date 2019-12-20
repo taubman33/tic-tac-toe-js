@@ -99,4 +99,9 @@ table {
   background: aqua;
 }
 
+input {
+  display: block;
+  margin-bottom: 16px;
+}
+
 /*# sourceMappingURL=main.css.map */
