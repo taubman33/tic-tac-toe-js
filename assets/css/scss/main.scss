@@ -1,33 +1,44 @@
 @use 'resets';
 
+h1 {
+  font-size: 3rem;
+  font-family: sans-serif;
+  font-weight: 700;
+  margin: 1rem 0;
+}
+
 .container {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: start;
-  background: yellowgreen;
   width: 100%;
   height: 100vh;
   position: relative;
 }
 
+form {
+  padding: 1rem;
+  border: 1px #000 solid;
+  text-align: center;
+}
+
 .board {
   display: flex;
-  width: 50%;
+  width: 40%;
   flex-wrap: wrap;
   min-width: 450px;
   max-width: 500px;
   
   .board-grid {
     width: percentage(1 / 3);
-    border: 1px red solid;
+    border: 1px #000 solid;
     box-sizing: border-box;
 
     .grid-content {
       width: 100%;
       padding-top: 100%;
       position: relative;
-      background: springgreen;
 
       .marker {
         display: flex;
@@ -40,7 +51,6 @@
         top: 0;
         right: 0;
         bottom: 0;
-        background: aqua;
       }
     }
   }
@@ -49,4 +59,19 @@
 input {
   display: block;
   margin-bottom: 16px;
+  font-size: 2rem;
+}
+
+button {
+  font-size: 2rem;
+  border-radius: 5px;
+  background-color: rgb(29, 29, 248);
+  border: 1px #000 solid;
+}
+
+.display-turn-or-game-result {
+  font-size: 2rem;
+  font-family: sans-serif;
+  font-weight: 700;
+  margin: 1rem 0;
 }

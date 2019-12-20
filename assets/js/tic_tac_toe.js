@@ -71,7 +71,6 @@ const displayController = (function() {
     let round = 0;
     return () => {
       round++;
-      console.log(round);
       return round;
     }
   };
@@ -113,12 +112,10 @@ const displayController = (function() {
       let checkGameOverResult = checkGameOver();
 
       if (/WINS!$/.test(checkGameOverResult)) {
-        console.log(checkGameOverResult);
         displayTurnOrGameResult.textContent = checkGameOverResult;
         removeMarkerOnBoardListener(e);
-      } else if (checkGameOverResult == "draw") {
-        console.log(checkGameOverResult);
-        displayTurnOrGameResult.textContent = checkGameOverResult;
+      } else if (checkGameOverResult == "Draw") {
+        displayTurnOrGameResult.textContent = checkGameOverResult + "!";
         removeMarkerOnBoardListener(e);
       }
     }
@@ -141,9 +138,7 @@ const displayController = (function() {
     if (checkVictory) {
       return checkVictory;
     } else if (draw() == "draw") {
-      return "draw";
-    } else {
-      return {};
+      return "Draw";
     }
 
     function horizontalVictory() {
