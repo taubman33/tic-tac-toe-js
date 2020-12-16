@@ -9,6 +9,7 @@ const gameBoard = (function() {
   const displayBoard = function() {
     if (document.querySelector(".board") != null) {
       return;
+
     } else {
       let container = document.querySelector(".container");
       let board = document.createElement("div");
@@ -61,8 +62,8 @@ const Player = function(name, marker) {
 
 // Module to control the flow of the game itself
 const displayController = (function() {
-  let player1 = Player("Kevin", "X");
-  let player2 = Player("Tim", "O");
+  let player1 = Player("P1", "X");
+  let player2 = Player("P2", "O");
   let countRound = roundCounter();
   let round = 0;
 
